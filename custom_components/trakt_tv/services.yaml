@@ -1,0 +1,41 @@
+# Example services.yaml entry
+
+# Service ID
+get_next_episode:
+  # Service name as shown in UI
+  name: Get Next Episode
+  # Description of the service
+  description: Gets the episode that you are on for the show provided.
+  # # Target entity_id (https://www.home-assistant.io/docs/blueprint/automation-trigger/#target)
+  # target:
+  #   entity:
+  #     domain: fan
+  #     # listed supported features.
+  #     supported_features:
+  #       - fan.FanEntityFeature.SET_SPEED
+  # Different fields that your service accepts
+  fields:
+    # Key of the field
+    id:
+      # Field name as shown in UI
+      name: ID
+      # Description of the field
+      description: The ID of the show.
+      # Whether or not field is required (default = false)
+      required: true
+      # Advanced fields are only shown when the advanced mode is enabled for the user
+      # (default = false)
+      advanced: false
+      # Example value that can be passed for this field
+      example: 143562
+      # # The default field value
+      # default: "high"
+      # # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control
+      # # the input UI for this field
+      # selector:
+      #   select:
+      #     options:
+      #       - "off"
+      #       - "low"
+      #       - "medium"
+      #       - "high"

@@ -28,6 +28,7 @@ PLATFORMS = ["sensor"]
 async def async_setup(hass: HomeAssistant, config: dict):
     """Set up the TraktTV component from a yaml (not supported)."""
     update_domain_data(hass, "configuration", CONFIG_SCHEMA(config).get(DOMAIN, {}))
+
     return True
 
 
@@ -69,6 +70,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         hass.async_create_task(
             hass.config_entries.async_forward_entry_setup(entry, platform)
         )
+
+    async def handle_get_next_episode(call):
+        """Handle the service call."""
+        id = call.data.get('id')
+        data = await api.fetch_show_progress(id)
+        event_data = {
+            "id": id,
+            "season": data['next_episode']['season'],
+            "episode": data['next_episode']['number'],
+        }
+        hass.bus.async_fire(DOMAIN, event_data)
+
+    hass.services.async_register(DOMAIN, "get_next_episode", handle_get_next_episode)
 
     return True
 
