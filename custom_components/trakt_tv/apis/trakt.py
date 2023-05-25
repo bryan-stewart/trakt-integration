@@ -91,6 +91,9 @@ class TraktApi:
             else:
                 await self.retry_request(300, response, method, url, retry, **kwargs)
 
+    async def fetch_ids(self, id: int, id_type: str = 'trakt', media_type: str = 'movie'):
+        return await self.request("get", f"/search/{id_type}/{id}?type={media_type}")
+
     async def fetch_calendar(
         self, path: str, from_date: str, nb_days: int, all_medias: bool
     ):
