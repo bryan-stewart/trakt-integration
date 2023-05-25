@@ -20,10 +20,10 @@ get_ids:
       selector:
         select:
           options:
-            - 'trakt'
-            - 'tvdb'
-            - 'tmdb'
-            - 'imdb'
+            - "trakt"
+            - "tvdb"
+            - "tmdb"
+            - "imdb"
     media_type:
       name: Media Type
       description: The type of media that you are looking for.
@@ -34,5 +34,18 @@ get_ids:
       selector:
         select:
           options:
-            - 'movie'
-            - 'show'
+            - "movie"
+            - "show"
+
+get_next_episode:
+  name: Get Next Episode
+  description: Gets the episode that you are on for the show provided.
+  fields:
+    id:
+      name: ID
+      description: The Trakt ID of the show.
+      required: true
+      advanced: false
+      example: 143562
+      selector:
+        text:
