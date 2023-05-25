@@ -1,3 +1,42 @@
+get_ids:
+  name: Get IDs
+  description: Get the IDs for a show/movie.
+  fields:
+    id:
+      name: ID
+      description: The ID of the show/movie.
+      required: true
+      advanced: false
+      example: 143562
+      selector:
+        text:
+    id_type:
+      name: ID Type
+      description: The type of ID that you are providing.
+      required: false
+      advanced: false
+      default: trakt
+      example: trakt
+      selector:
+        select:
+          options:
+            - "trakt"
+            - "tvdb"
+            - "tmdb"
+            - "imdb"
+    media_type:
+      name: Media Type
+      description: The type of media that you are looking for.
+      required: false
+      advanced: false
+      default: movie
+      example: show
+      selector:
+        select:
+          options:
+            - "movie"
+            - "show"
+
 get_next_episode:
   name: Get Next Episode
   description: Gets the episode that you are on for the show provided.

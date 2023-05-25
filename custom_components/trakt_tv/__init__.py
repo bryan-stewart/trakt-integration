@@ -70,6 +70,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
             hass.config_entries.async_forward_entry_setup(entry, platform)
         )
 
+    async def handle_get_ids(call):
+        data = await api.fetch_ids(**call.data)
+        ids = data[0]['movie']['ids'] if data[0]['movie'] else data[0]['show']['ids']
+        res = {'ids': ids, 'req': call.data['id']}
+        hass.bus.async_fire(DOMAIN + '_ids', res)
+
+    hass.services.async_register(DOMAIN, "get_ids", handle_get_ids)
+
     async def handle_get_next_episode(call):
         id = call.data.get('id')
         data = await api.fetch_show_progress(id)
