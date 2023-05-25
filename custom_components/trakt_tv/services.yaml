@@ -1,0 +1,10 @@
+get_next_episode:
+  name: Get Next Episode
+  description: Gets the episode that you are on for the show provided.
+  fields:
+    id:
+      name: ID
+      description: The Trakt ID of the show.
+      required: true
+      advanced: false
+      example: 143562
