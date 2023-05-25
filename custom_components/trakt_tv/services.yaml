@@ -8,3 +8,5 @@ get_next_episode:
       required: true
       advanced: false
       example: 143562
+      selector:
+        text:
