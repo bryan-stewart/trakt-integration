@@ -71,15 +71,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         )
 
     async def handle_get_next_episode(call):
-        """Handle the service call."""
         id = call.data.get('id')
         data = await api.fetch_show_progress(id)
-        event_data = {
-            "id": id,
+        res = {
             "season": data['next_episode']['season'],
             "episode": data['next_episode']['number'],
+            "req": id,
         }
-        hass.bus.async_fire(DOMAIN, event_data)
+        res = {}
+        hass.bus.async_fire(DOMAIN + '_episode', res)
 
     hass.services.async_register(DOMAIN, "get_next_episode", handle_get_next_episode)
 
