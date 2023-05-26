@@ -72,7 +72,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
 
     async def handle_get_ids(call):
         data = await api.fetch_ids(**call.data)
-        ids = data[0]['movie']['ids'] if data[0]['movie'] else data[0]['show']['ids']
+        ids = data[0]['movie']['ids'] if 'movie' in data[0] else data[0]['show']['ids']
         res = {'ids': ids, 'req': call.data['id']}
         hass.bus.async_fire(DOMAIN + '_ids', res)
 
@@ -86,7 +86,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
             "episode": data['next_episode']['number'],
             "req": id,
         }
-        res = {}
         hass.bus.async_fire(DOMAIN + '_episode', res)
 
     hass.services.async_register(DOMAIN, "get_next_episode", handle_get_next_episode)
